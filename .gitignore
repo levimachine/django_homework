@@ -1,0 +1,78 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+.venv*/
+pip-wheel-metadata/
+poetry.lock.bak
+
+# --- Poetry ---
+# Бинарные кэши Poetry
+.poetry/
+.cache/
+# Lock-файл можно оставить, если вы хотите фиксировать зависимости
+# poetry.lock
+
+# --- Django ---
+*.log
+*.pot
+*.pyc
+*.pyo
+*.mo
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+static/
+local_settings.py
+
+# --- Django migrations ---
+*/migrations/__pycache__/
+*/migrations/*.py
+!*/migrations/__init__.py  # но сохраняем инициализационные файлы
+
+# --- IDE / Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# --- OS generated files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Tests / Coverage ---
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.nox/
+pytest_cache/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# --- Jupyter ---
+.ipynb_checkpoints
+*.ipynb
+
+# --- Others ---
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+MANIFEST
