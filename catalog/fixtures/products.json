@@ -1,0 +1,222 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Корм для собак Royal Canin",
+      "description": "Высококачественный сухой корм для взрослых собак.",
+      "image": "",
+      "category": 1,
+      "price_per_piece": 2500
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Игрушка для собак Мячик",
+      "description": "Прочный резиновый мяч для активных игр.",
+      "image": "",
+      "category": 1,
+      "price_per_piece": 500
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Корм для кошек Whiskas",
+      "description": "Сухой корм для взрослых кошек.",
+      "image": "",
+      "category": 2,
+      "price_per_piece": 1200
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Игрушка для кошек Мышка",
+      "description": "Мягкая игрушка для активных кошек.",
+      "image": "",
+      "category": 2,
+      "price_per_piece": 250
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Клетка для попугая",
+      "description": "Просторная клетка для средних попугаев.",
+      "image": "",
+      "category": 3,
+      "price_per_piece": 3500
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Сено для кролика",
+      "description": "Свежее сено для питания грызунов.",
+      "image": "",
+      "category": 4,
+      "price_per_piece": 300
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "Аквариум 50л",
+      "description": "Аквариум на 50 литров с крышкой и подсветкой.",
+      "image": "",
+      "category": 5,
+      "price_per_piece": 7000
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Игрушка для собак Канат",
+      "description": "Прочный канат для жевания и игр.",
+      "image": "",
+      "category": 1,
+      "price_per_piece": 400
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Лоток для кошки",
+      "description": "Удобный лоток с бортиком.",
+      "image": "",
+      "category": 2,
+      "price_per_piece": 600
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Попугайские семечки",
+      "description": "Смесь семян для средних попугаев.",
+      "image": "",
+      "category": 3,
+      "price_per_piece": 150
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "Корм для хомячков",
+      "description": "Полноценный корм для грызунов.",
+      "image": "",
+      "category": 4,
+      "price_per_piece": 200
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "name": "Декорации для аквариума",
+      "description": "Камни, ракушки и растения для оформления.",
+      "image": "",
+      "category": 5,
+      "price_per_piece": 1200
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "name": "Витамины для собак",
+      "description": "Комплекс витаминов для здоровья собак.",
+      "image": "",
+      "category": 1,
+      "price_per_piece": 800
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+      "name": "Наполнитель для кошек",
+      "description": "Комкующийся наполнитель для лотка.",
+      "image": "",
+      "category": 2,
+      "price_per_piece": 400
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "name": "Корм для попугаев",
+      "description": "Сбалансированная смесь семян и гранул.",
+      "image": "",
+      "category": 3,
+      "price_per_piece": 350
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "name": "Домик для хомячка",
+      "description": "Удобный деревянный домик для грызунов.",
+      "image": "",
+      "category": 4,
+      "price_per_piece": 600
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 17,
+    "fields": {
+      "name": "Фильтр для аквариума",
+      "description": "Надёжный фильтр для чистой воды.",
+      "image": "",
+      "category": 5,
+      "price_per_piece": 2500
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 18,
+    "fields": {
+      "name": "Поводок для собак",
+      "description": "Прочный поводок длиной 2 метра.",
+      "image": "",
+      "category": 1,
+      "price_per_piece": 700
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 19,
+    "fields": {
+      "name": "Игрушка-когтеточка для кошек",
+      "description": "Когтеточка с мягкой игрушкой.",
+      "image": "",
+      "category": 2,
+      "price_per_piece": 1200
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 20,
+    "fields": {
+      "name": "Светильник для аквариума",
+      "description": "LED подсветка для аквариумов.",
+      "image": "",
+      "category": 5,
+      "price_per_piece": 900
+    }
+  }
+]
