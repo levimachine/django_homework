@@ -34,8 +34,6 @@ local_settings.py
 
 # --- Django migrations ---
 */migrations/__pycache__/
-*/migrations/*.py
-!*/migrations/__init__.py  # но сохраняем инициализационные файлы
 
 # --- IDE / Editors ---
 .vscode/
