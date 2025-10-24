@@ -1,5 +1,4 @@
 {% extends 'catalog/base.html' %}
-{% load catalog_tags %}
 {% block content %}
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">Бобр</h1>
@@ -17,11 +16,10 @@
                             <h1 class="card-title pricing-card-title">{{ object.price_per_piece }} руб.</h1>
                             <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                                 <li>{{ object.description|slice:':100' }}</li>
-                                <li>Категория - {{ object.category }}</li>
-                                <li>Дата создания - {{ object.create_at }}</li>
-                                <li><img src='{% media_path_tag object %}'></li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                            <a href="{% url 'catalog:product_details' object.pk %}"
+                               class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                            </form>
                         </div>
                     </div>
                 </div>
