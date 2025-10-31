@@ -1,21 +1,75 @@
-from django.shortcuts import render, get_object_or_404
-
-from catalog.models import Product
-
-
-def home(request):
-    product_list = Product.objects.all()
-    context = {
-        'objects_list': product_list
-    }
-    return render(request, 'catalog/home.html', context)
+from django.shortcuts import render
+from django.urls import reverse_lazy, reverse
+from django.views.generic import DetailView, ListView, CreateView, UpdateView
+from catalog.models import Product, BlogPost
+from pytils.translit import slugify
 
 
-def product_details(request, product_id):
-    context = {
-        'product': get_object_or_404(Product, id=product_id),
-    }
-    return render(request, 'catalog/product_details.html', context)
+class ProductListView(ListView):
+    model = Product
+
+
+class ProductDetailView(DetailView):
+    model = Product
+
+
+
+class ProductListView2(ListView):
+    model = Product
+    template_name = 'catalog/products.html'
+
+
+############################################################
+class BlogPostListView(ListView):
+    model = BlogPost
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_published=True)
+        return queryset
+
+
+class BlogPostCreateView(CreateView):
+    model = BlogPost
+    fields = ['title', 'content', 'is_published']
+    success_url = reverse_lazy('catalog:list_blogpost')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_post = form.save()
+            new_post.slug = slugify(new_post.title)
+            new_post.save()
+        return super().form_valid(form)
+
+
+class BlogPostUpdateView(UpdateView):
+    model = BlogPost
+    fields = ['content']
+    success_url = reverse_lazy('catalog:list_blogpost')
+    template_name = 'catalog/blogpost_update.html'
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_post = form.save()
+            new_post.slug = slugify(new_post.title)
+            new_post.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('catalog:posts_details', args=[self.kwargs.get('pk')])
+
+
+class BlogPostDetailView(DetailView):
+    model = BlogPost
+
+    def get_object(self, queryset=None):
+        object = super().get_object(queryset)
+        object.views_count += 1
+        object.save()
+        return object
+
+
+############################################################
 
 
 def contacts(request):
@@ -28,11 +82,3 @@ def contacts(request):
 Телефон: {phone}
 Сообщение: {message}""")
     return render(request, 'catalog/contacts.html')
-
-
-def products(request):
-    product_list = Product.objects.all()
-    context = {
-        'objects_list': product_list
-    }
-    return render(request, 'catalog/products.html', context)

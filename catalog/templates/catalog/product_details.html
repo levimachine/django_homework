@@ -1,9 +1,0 @@
-{% extends 'catalog/base.html' %}
-{% load catalog_tags %}
-{% block content %}
-
-    {{ product.name }}<br>
-    Категория - {{ product.category }}<br>
-    Дата создания - {{ product.create_at }}<br>
-    <img src='{% media_path_tag product %}'>
-{% endblock %}

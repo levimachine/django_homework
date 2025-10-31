@@ -4,7 +4,7 @@
         <h1 class="display-4">Бобр</h1>
         <p class="lead">Бобр - это тест зоомагазин для платформы SkyPro!</p>
     </div>
-    {% for object in objects_list %}
+    {% for object in product_list %}
         <div class="container">
             <div class="row text-center">
                 <div class="col-12">
@@ -19,7 +19,6 @@
                             </ul>
                             <a href="{% url 'catalog:product_details' object.pk %}"
                                class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
-                            </form>
                         </div>
                     </div>
                 </div>

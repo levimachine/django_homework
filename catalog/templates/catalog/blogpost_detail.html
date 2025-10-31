@@ -1,0 +1,12 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    <p>Содержание</p><br>
+
+    <h1>{{ object.content }}</h1>
+    <strong>Slug для поиска - {{ object.slug }}</strong><br>
+    <strong>Количество просмотров: {{ object.views_count }}</strong><br>
+    <a href="{% url 'catalog:list_blogpost' %}"
+       class="btn btn-lg btn-block btn-outline-primary">Вернуться ко всем постам</a>
+{% endblock %}
