@@ -1,9 +1,20 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
-{% block content %}
 
-    {{ object.name }}<br>
-    Категория - {{ object.category }}<br>
-    Дата создания - {{ object.create_at }}<br>
-    <img src='{% media_path_tag object %}'>
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header"><h5>{{ object.name }}</h5></div>
+            <div class="card-body">
+                Категория - {{ object.category }}<br>
+                Дата создания - {{ object.create_at }}
+            </div>
+            <div class="card-footer">
+                <img src='{% media_path_tag object %}'>
+                <a href="{% url 'catalog:version_list' object.pk %}" class="btn btn-primary">Версии продукта</a>
+                <a href="{% url 'catalog:version_create' object.pk %}" class="btn btn-success">Создать версию
+                    продукта</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

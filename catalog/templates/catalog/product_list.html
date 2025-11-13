@@ -4,6 +4,9 @@
         <h1 class="display-4">Бобр</h1>
         <p class="lead">Бобр - это тест зоомагазин для платформы SkyPro!</p>
     </div>
+    <div class="container-lg">
+        <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-5">Создать продукт</a>
+    </div>
     {% for object in product_list %}
         <div class="container">
             <div class="row text-center">

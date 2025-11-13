@@ -1,25 +1,28 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-    <a href="{% url 'catalog:create_blogpost' %}"
-       class="btn btn-primary">Создать новый пост</a>
-    {% for object in blogpost_list %}
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-3">
-                    <div class="card mb-4 box-shadow">
-                        <div class="card-header">
-                            <h4 class="my-0 font-weight-normal">{{ object }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <a href="{% url 'catalog:posts_details' object.pk %}"
-                               class="btn btn-lg btn-block btn-outline-primary">Посмотреть пост</a>
-                            <a href="{% url 'catalog:update_post' object.pk %}"
-                               class="btn btn-danger">Редактировать пост</a>
-                        </div>
+<div class="container">
+    <div class="text-center mb-4">
+        <a href="{% url 'catalog:create_blogpost' %}"
+           class="btn btn-primary">Создать новый пост</a>
+    </div>
+
+    <div class="row">
+        {% for object in blogpost_list %}
+            <div class="col-12 col-md-8 col-lg-6 mx-auto mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ object }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'catalog:posts_details' object.pk %}"
+                           class="btn btn-lg btn-block btn-outline-primary mb-2">Посмотреть пост</a>
+                        <a href="{% url 'catalog:update_post' object.pk %}"
+                           class="btn btn-lg btn-block btn-outline-danger mb-2">Редактировать пост</a>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

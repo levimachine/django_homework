@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
-from catalog.models import Product, BlogPost
+from catalog.forms import BlogPostForm, ProductForm, VersionForm
+from catalog.models import Product, BlogPost, Version
 from pytils.translit import slugify
 
 
@@ -13,10 +14,10 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-
-class ProductListView2(ListView):
+class ProductCreateView(CreateView):
     model = Product
-    template_name = 'catalog/products.html'
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:home')
 
 
 ############################################################
@@ -25,13 +26,13 @@ class BlogPostListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(is_published=True)
+        queryset = queryset.filter(is_published='published')
         return queryset
 
 
 class BlogPostCreateView(CreateView):
     model = BlogPost
-    fields = ['title', 'content', 'is_published']
+    form_class = BlogPostForm
     success_url = reverse_lazy('catalog:list_blogpost')
 
     def form_valid(self, form):
@@ -44,9 +45,8 @@ class BlogPostCreateView(CreateView):
 
 class BlogPostUpdateView(UpdateView):
     model = BlogPost
-    fields = ['content']
+    form_class = BlogPostForm
     success_url = reverse_lazy('catalog:list_blogpost')
-    template_name = 'catalog/blogpost_update.html'
 
     def form_valid(self, form):
         if form.is_valid():
@@ -82,3 +82,22 @@ def contacts(request):
 Телефон: {phone}
 Сообщение: {message}""")
     return render(request, 'catalog/contacts.html')
+
+
+############################################################
+
+class VersionCreateView(CreateView):
+    model = Version
+    form_class = VersionForm
+
+    def get_success_url(self):
+        return reverse('catalog:version_list', kwargs={'pk' : self.object.product.id})
+
+
+class VersionListView(ListView):
+    model = Version
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_actual='actual', product_id=self.kwargs['pk'])
+        return queryset

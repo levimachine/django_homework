@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+    <div class="row">
+        {% for object in version_list %}
+            <div class="col-12 col-md-8 col-lg-6 mx-auto mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Версия продукта '{{ object.product.name.lower }}'</h4>
+                    </div>
+                    <div class="card-body">
+                        Номер версии - {{ object.number }}<br>
+                        Название версии - {{ object.title }}<br>
+                        Актуальность - {% if object.is_actual == 'actual' %}
+                        актуальная
+                    {% else %}
+                        не актуальная
+                    {% endif %}
+                    </div>
+                    <a href="{% url 'catalog:product_details' object.product.pk %}" class="btn btn-primary">Вернуться
+                        к
+                        продукту</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

@@ -2,11 +2,22 @@
 
 
 {% block content %}
-    <p>Содержание</p><br>
-
-    <h1>{{ object.content }}</h1>
-    <strong>Slug для поиска - {{ object.slug }}</strong><br>
-    <strong>Количество просмотров: {{ object.views_count }}</strong><br>
-    <a href="{% url 'catalog:list_blogpost' %}"
-       class="btn btn-lg btn-block btn-outline-primary">Вернуться ко всем постам</a>
+    <div class="col-12">
+        <div class="card mb-2">
+            <div class="card-header">Содержание</div>
+            <div class="card-body">{{ object.content }}</div>
+            <div class="card-footer">
+                Slug для поиска - {{ object.slug }}<br>
+                Количество просмотров: {{ object.views_count }}<br>
+                Опубликовано:
+                {% if object.is_published == 'published' %}
+                    Да
+                {% else %}
+                    Нет
+                {% endif %}
+            </div>
+        </div>
+        <a href="{% url 'catalog:list_blogpost' %}"
+           class="btn btn-lg btn-block btn-outline-primary">Вернуться ко всем постам</a>
+    </div>
 {% endblock %}

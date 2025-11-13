@@ -52,7 +52,9 @@ class BlogPost(models.Model):
     slug = models.CharField(max_length=150, verbose_name='slug')
     preview = models.ImageField(upload_to='media/', verbose_name='Превью изображение')
     views_count = models.IntegerField(default=0, verbose_name='Количество просмотров')
-    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    is_published = models.CharField(default=True,
+                                    choices=[('published', 'Да'), ('not_published', 'Нет')],
+                                    verbose_name='Опубликовано')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
 
     def __str__(self):
@@ -61,3 +63,19 @@ class BlogPost(models.Model):
     class Meta:
         verbose_name = 'пост'
         verbose_name_plural = 'посты'
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, to_field='id', verbose_name='Продукт')
+    number = models.IntegerField(verbose_name='Номер версии')
+    title = models.CharField(max_length=150,  verbose_name='Название версии')
+    is_actual = models.CharField(choices=[('actual', 'Актуальная'), ('not_actual', 'Не уктуальная')],
+                                 verbose_name='Актуальность версии')
+
+    def __str__(self):
+        return f'{self.title}, {self.number}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
+
