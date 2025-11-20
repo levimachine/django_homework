@@ -2,26 +2,24 @@ from catalog.models import BlogPost, Product, Version
 from django import forms
 
 
-class BlogPostForm(forms.ModelForm):
+class StyleFormMixin:
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class BlogPostForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = BlogPost
         fields = ('title', 'content', 'is_published')
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
 
-
-class ProductForm(forms.ModelForm):
+class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
         fields = ('name', 'category', 'description', 'price_per_piece',)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
 
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')
@@ -31,15 +29,20 @@ class ProductForm(forms.ModelForm):
         return cleaned_data
 
 
-class VersionForm(forms.ModelForm):
+class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+    def clean(self):
+        cleaned_data = super().clean()
+        product = cleaned_data.get('product')
+        is_actual = cleaned_data.get('is_actual')
+        versions = Version.objects.filter(product=product, is_actual='actual')
+
+        if len(versions) > 0 and is_actual == 'actual':
+            raise forms.ValidationError('Может быть только одна активная версия!')
+        return cleaned_data
 
     def clean_number(self):
         cleaned_data = self.cleaned_data.get('number')
