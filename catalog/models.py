@@ -1,4 +1,5 @@
 from django.db import models
+from config.settings import AUTH_USER_MODEL
 
 # Create your models here.
 NULLABLE = {'blank': True, 'null': True}
@@ -27,6 +28,7 @@ class Product(models.Model):
     price_per_piece = models.IntegerField(verbose_name='Цена за штуку')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+    user = models.ForeignKey(AUTH_USER_MODEL, default=True, on_delete=models.CASCADE, verbose_name='пользователь')
 
     def __str__(self):
         return f'{self.name}'
@@ -56,6 +58,8 @@ class BlogPost(models.Model):
                                     choices=[('published', 'Да'), ('not_published', 'Нет')],
                                     verbose_name='Опубликовано')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
+
+    user = models.ForeignKey(AUTH_USER_MODEL,  default=True, on_delete=models.CASCADE, verbose_name='пользователь')
 
     def __str__(self):
         return self.title

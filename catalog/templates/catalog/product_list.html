@@ -5,27 +5,31 @@
         <p class="lead">Бобр - это тест зоомагазин для платформы SkyPro!</p>
     </div>
     <div class="container-lg">
-        <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-5">Создать продукт</a>
+        {% if  user.is_verify %}
+            <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-5">Создать продукт</a>
+        {% endif %}
     </div>
     {% for object in product_list %}
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-12">
-                    <div class="card mb-4 box-shadow">
-                        <div class="card-header">
-                            <h4 class="my-0 font-weight-normal">{{ object }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">{{ object.price_per_piece }} руб.</h1>
-                            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                <li>{{ object.description|slice:':100' }}</li>
-                            </ul>
-                            <a href="{% url 'catalog:product_details' object.pk %}"
-                               class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+        {% if object.user == user %}
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">{{ object }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">{{ object.price_per_piece }} руб.</h1>
+                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                                    <li>{{ object.description|slice:':100' }}</li>
+                                </ul>
+                                <a href="{% url 'catalog:product_details' object.pk %}"
+                                   class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}

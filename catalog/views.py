@@ -20,6 +20,12 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -63,10 +69,12 @@ class BlogPostCreateView(CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            new_post = form.save()
-            new_post.slug = slugify(new_post.title)
-            new_post.save()
+            self.object = form.save()
+            self.object.user = self.request.user
+            self.object.slug = slugify(self.object.title)
+            self.object.save()
         return super().form_valid(form)
+
 
 
 class BlogPostUpdateView(UpdateView):

@@ -4,5 +4,18 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:home' %}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contacts' %}">Контакты</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:list_blogpost' %}">Посты</a>
+        {% if user.is_authenticated %}
+            <form action="{% url 'users:user_logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button class="p-2 btn btn-outline-success" type="submit">Выйти</button>
+            </form>
+            <a class="p-2 btn btn-outline-danger" href="{% url 'users:reset_password' %}">Сбросить пароль</a>
+            {% if not user.is_verify %}
+                <a class="p-2 btn btn-outline-danger" href="{% url 'users:user_verify' user.pk %}">Верификация</a>
+            {% endif %}
+        {% else %}
+            <a class="p-2 btn btn-outline-warning" href="{% url 'users:user_create' %}">Регистрация</a>
+            <a class="p-2 btn btn-outline-success" href="{% url 'users:user_login' %}">Войти</a>
+        {% endif %}
     </nav>
 </div>
