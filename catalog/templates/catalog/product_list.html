@@ -5,12 +5,12 @@
         <p class="lead">Бобр - это тест зоомагазин для платформы SkyPro!</p>
     </div>
     <div class="container-lg">
-        {% if  user.is_verify %}
+        {% if  user.is_verify or user.is_superuser %}
             <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-5">Создать продукт</a>
         {% endif %}
     </div>
     {% for object in product_list %}
-        {% if object.user == user %}
+        {% if object.user == user or user.is_superuser %}
             <div class="container">
                 <div class="row text-center">
                     <div class="col-12">

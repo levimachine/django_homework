@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import  LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -7,7 +10,7 @@ from catalog.models import Product, BlogPost, Version
 from pytils.translit import slugify
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     model = Product
 
 
@@ -31,6 +34,12 @@ class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
 
+    def dispatch(self, request, *args, **kwargs):
+        product = self.get_object()
+        if request.user != product.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('catalog:product_details', args=[self.kwargs.get('pk')])
 
@@ -53,7 +62,7 @@ class ProductUpdateView(UpdateView):
 
 
 ############################################################
-class BlogPostListView(ListView):
+class BlogPostListView(LoginRequiredMixin, ListView):
     model = BlogPost
 
     def get_queryset(self, *args, **kwargs):
@@ -74,7 +83,6 @@ class BlogPostCreateView(CreateView):
             self.object.slug = slugify(self.object.title)
             self.object.save()
         return super().form_valid(form)
-
 
 
 class BlogPostUpdateView(UpdateView):
@@ -105,7 +113,7 @@ class BlogPostDetailView(DetailView):
 
 ############################################################
 
-
+@login_required
 def contacts(request):
     if request.method == 'POST':
         name = request.POST.get('name')
