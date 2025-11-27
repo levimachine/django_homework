@@ -13,6 +13,7 @@ class User(AbstractUser):
     secret_key = models.CharField(max_length=6, verbose_name='секретный ключ(почты)', **NULLABLE)
     user_input_secret_key = models.CharField(max_length=6, verbose_name='секретный ключ', **NULLABLE)
     is_verify = models.BooleanField(default=False, verbose_name='Верификация', **NULLABLE)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

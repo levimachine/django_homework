@@ -1,17 +1,33 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import  LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from catalog.forms import BlogPostForm, ProductForm, VersionForm
-from catalog.models import Product, BlogPost, Version
+from catalog.models import Product, BlogPost, Version, Category
 from pytils.translit import slugify
+from catalog.services import get_cached_category_products
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['products'] = get_cached_category_products(self.object)
+        return context_data
 
 
 class ProductListView(LoginRequiredMixin, ListView):
     model = Product
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['categories'] = Category.objects.all()
+        return context_data
 
 
 class ProductDetailView(DetailView):
